@@ -39,6 +39,31 @@ const DEFAULT_STATE: CineState = {
   useImageRef: false,
   imageWeight: 1.0,
   customNegatives: '',
+  // L9 Epic Poses
+  poseEpic: '',
+  poseCategory: '',
+  poseComposer: [],
+  poseIntensity: '',
+  // L10 Epic Moves
+  epicMove: '',
+  epicMoveCategory: '',
+  comboSequence: '',
+  moveIntensity: '',
+  // L11 Physique
+  muscleDefinition: '',
+  muscleGroups: [],
+  physiquePreset: '',
+  bodyDetail: [],
+  // L12 Anime Dark
+  animeDarkStyle: '',
+  animePhysics: '',
+  animeIntensity: '',
+  animeEffects: [],
+  // L13 Advanced Lighting
+  lightingScheme: '',
+  lightAnimation: '',
+  lightIntensity: '',
+  lightColorShift: '',
   openLayers: ['L1_CHARACTER'],
   generatedPrompt: '',
   generatedNegative: '',
@@ -94,6 +119,32 @@ export const useCineStore = create<CineStore>()((set) => ({
   setImageWeight: (v) => set(s => { const n = { ...s, imageWeight: v }; return { ...n, ...recompute(n) } }),
   setCustomNegatives: (v) => set(s => { const n = { ...s, customNegatives: v }; return { ...n, ...recompute(n) } }),
 
+  // L9
+  setPoseEpic: (v) => set(s => { const n = { ...s, poseEpic: v }; return { ...n, ...recompute(n) } }),
+  setPoseCategory: (v) => set(s => { const n = { ...s, poseCategory: v }; return { ...n, ...recompute(n) } }),
+  setPoseComposer: (v) => set(s => { const n = { ...s, poseComposer: v }; return { ...n, ...recompute(n) } }),
+  setPoseIntensity: (v) => set(s => { const n = { ...s, poseIntensity: v }; return { ...n, ...recompute(n) } }),
+  // L10
+  setEpicMove: (v) => set(s => { const n = { ...s, epicMove: v }; return { ...n, ...recompute(n) } }),
+  setEpicMoveCategory: (v) => set(s => { const n = { ...s, epicMoveCategory: v }; return { ...n, ...recompute(n) } }),
+  setComboSequence: (v) => set(s => { const n = { ...s, comboSequence: v }; return { ...n, ...recompute(n) } }),
+  setMoveIntensity: (v) => set(s => { const n = { ...s, moveIntensity: v }; return { ...n, ...recompute(n) } }),
+  // L11
+  setMuscleDefinition: (v) => set(s => { const n = { ...s, muscleDefinition: v }; return { ...n, ...recompute(n) } }),
+  setMuscleGroups: (v) => set(s => { const n = { ...s, muscleGroups: v }; return { ...n, ...recompute(n) } }),
+  setPhysiquePreset: (v) => set(s => { const n = { ...s, physiquePreset: v }; return { ...n, ...recompute(n) } }),
+  setBodyDetail: (v) => set(s => { const n = { ...s, bodyDetail: v }; return { ...n, ...recompute(n) } }),
+  // L12
+  setAnimeDarkStyle: (v) => set(s => { const n = { ...s, animeDarkStyle: v }; return { ...n, ...recompute(n) } }),
+  setAnimePhysics: (v) => set(s => { const n = { ...s, animePhysics: v }; return { ...n, ...recompute(n) } }),
+  setAnimeIntensity: (v) => set(s => { const n = { ...s, animeIntensity: v }; return { ...n, ...recompute(n) } }),
+  setAnimeEffects: (v) => set(s => { const n = { ...s, animeEffects: v }; return { ...n, ...recompute(n) } }),
+  // L13
+  setLightingScheme: (v) => set(s => { const n = { ...s, lightingScheme: v }; return { ...n, ...recompute(n) } }),
+  setLightAnimation: (v) => set(s => { const n = { ...s, lightAnimation: v }; return { ...n, ...recompute(n) } }),
+  setLightIntensity: (v) => set(s => { const n = { ...s, lightIntensity: v }; return { ...n, ...recompute(n) } }),
+  setLightColorShift: (v) => set(s => { const n = { ...s, lightColorShift: v }; return { ...n, ...recompute(n) } }),
+
   toggleLayer: (id) => set(s => ({
     openLayers: s.openLayers.includes(id) ? s.openLayers.filter(x => x !== id) : [...s.openLayers, id],
   })),
@@ -110,7 +161,7 @@ export const useCineStore = create<CineStore>()((set) => ({
       actionDirection: fields.actionDirection as DirectionKey,
       scaleKey: fields.scaleKey as ScaleKey,
       aspectRatio: fields.aspectRatio as AspectRatio,
-      openLayers: ['L1_CHARACTER','L2_ACTION','L3_ENVIRONMENT','L4_LIGHTING','L5_TECHNICAL','L6_COSTUME','L7_PARAMETERS','L8_NEGATIVE'],
+      openLayers: ['L1_CHARACTER','L2_ACTION','L3_ENVIRONMENT','L4_LIGHTING','L5_TECHNICAL','L6_COSTUME','L7_PARAMETERS','L8_NEGATIVE','L9_POSES','L10_EPIC_MOVES','L11_PHYSIQUE','L12_ANIME_DARK','L13_LIGHTING'],
     }
     return { ...n, ...recompute(n) }
   }),

@@ -1,5 +1,5 @@
 import type { CineState } from '../types'
-import { ACTION_VERBS, DIRECTIONS, SCALE_OPTIONS, LOCATIONS, ENVIRONMENT_ELEMENTS, LIGHT_SOURCES, LIGHT_QUALITIES, COLOR_PALETTES, DEFAULT_NEGATIVE } from '../data/schema'
+import { ACTION_VERBS, DIRECTIONS, SCALE_OPTIONS, LOCATIONS, ENVIRONMENT_ELEMENTS, LIGHT_SOURCES, LIGHT_QUALITIES, COLOR_PALETTES, DEFAULT_NEGATIVE, POSE_EPICAS, POSE_COMPOSER_OPTIONS, EPIC_MOVES, COMBO_SEQUENCES, MUSCLE_GROUP_VISIBILITY, PHYSIQUE_PRESETS, ANIME_DARK_STYLES, ANIME_PHYSICS_OPTIONS, LIGHTING_SCHEMES, LIGHT_ANIMATION_OPTIONS } from '../data/schema'
 
 export function buildPrompt(s: CineState): string {
   const parts: string[] = []
@@ -65,6 +65,70 @@ export function buildPrompt(s: CineState): string {
   if (s.costumeMaterial) parts.push(s.costumeMaterial)
   if (s.costumefit) parts.push(s.costumefit)
   if (s.physique) parts.push(s.physique)
+
+  // L9 — Epic Poses
+  if (s.poseEpic) {
+    const poseData = POSE_EPICAS[s.poseEpic]
+    if (poseData) parts.push(poseData.text)
+  }
+  if (s.poseIntensity) parts.push(`${s.poseIntensity.toLowerCase()} pose intensity`)
+  if (s.poseComposer.length > 0) {
+    const composerTexts = s.poseComposer.map(id => {
+      const opt = POSE_COMPOSER_OPTIONS.find(o => o.id === id)
+      return opt?.label ?? ''
+    }).filter(Boolean)
+    if (composerTexts.length) parts.push(`pose composition: ${composerTexts.join(', ')}`)
+  }
+
+  // L10 — Epic Moves
+  if (s.epicMove) {
+    const moveData = EPIC_MOVES[s.epicMove]
+    if (moveData) parts.push(moveData.text)
+  }
+  if (s.moveIntensity) parts.push(`${s.moveIntensity.toLowerCase()} movement intensity`)
+  if (s.comboSequence) {
+    const combo = COMBO_SEQUENCES.find(c => c.id === s.comboSequence)
+    if (combo) parts.push(`combo sequence: ${combo.moves.join(' → ')}`)
+  }
+
+  // L11 — Physique
+  if (s.muscleDefinition) parts.push(s.muscleDefinition.replace(/_/g, ' ') + ' muscle definition')
+  if (s.muscleGroups.length > 0) {
+    const groupLabels = s.muscleGroups.map(id => {
+      const mg = MUSCLE_GROUP_VISIBILITY.find(m => m.id === id)
+      return mg?.label ?? ''
+    }).filter(Boolean)
+    if (groupLabels.length) parts.push(`visible muscle groups: ${groupLabels.join(', ')}`)
+  }
+  if (s.physiquePreset) {
+    const preset = PHYSIQUE_PRESETS.find(p => p.id === s.physiquePreset)
+    if (preset) parts.push(`${preset.name} physique`)
+  }
+  if (s.bodyDetail.length > 0) parts.push(`body details: ${s.bodyDetail.join(', ')}`)
+
+  // L12 — Anime Dark
+  if (s.animeDarkStyle) {
+    const style = ANIME_DARK_STYLES.find(st => st.id === s.animeDarkStyle)
+    if (style) parts.push(`${style.name} anime style, ${style.description}`)
+  }
+  if (s.animePhysics) {
+    const phys = ANIME_PHYSICS_OPTIONS.find(p => p.id === s.animePhysics)
+    if (phys) parts.push(phys.description)
+  }
+  if (s.animeIntensity) parts.push(`${s.animeIntensity.toLowerCase()} anime intensity`)
+  if (s.animeEffects.length > 0) parts.push(`anime effects: ${s.animeEffects.join(', ')}`)
+
+  // L13 — Advanced Lighting
+  if (s.lightingScheme) {
+    const scheme = LIGHTING_SCHEMES.find(ls => ls.id === s.lightingScheme)
+    if (scheme) parts.push(`${scheme.name} lighting: ${scheme.description}`)
+  }
+  if (s.lightAnimation) {
+    const anim = LIGHT_ANIMATION_OPTIONS.find(a => a.id === s.lightAnimation)
+    if (anim) parts.push(`animated light: ${anim.description}`)
+  }
+  if (s.lightIntensity) parts.push(`${s.lightIntensity.toLowerCase()} light intensity`)
+  if (s.lightColorShift) parts.push(`color shift: ${s.lightColorShift}`)
 
   // Deduplicate
   const seen = new Set<string>()

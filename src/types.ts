@@ -47,6 +47,31 @@ export interface CineState {
   imageWeight: number
   // L8 Negative / Exclusions
   customNegatives: string
+  // L9 Epic Poses
+  poseEpic: string
+  poseCategory: string
+  poseComposer: string[]
+  poseIntensity: string
+  // L10 Epic Moves
+  epicMove: string
+  epicMoveCategory: string
+  comboSequence: string
+  moveIntensity: string
+  // L11 Physique
+  muscleDefinition: string
+  muscleGroups: string[]
+  physiquePreset: string
+  bodyDetail: string[]
+  // L12 Anime Dark
+  animeDarkStyle: string
+  animePhysics: string
+  animeIntensity: string
+  animeEffects: string[]
+  // L13 Advanced Lighting
+  lightingScheme: string
+  lightAnimation: string
+  lightIntensity: string
+  lightColorShift: string
   // UI
   openLayers: string[]
   generatedPrompt: string
@@ -91,4 +116,29 @@ export interface CineStore extends CineState {
   loadPreset: (key: string) => void
   randomize: () => void
   reset: () => void
+  // L9
+  setPoseEpic: (v: string) => void
+  setPoseCategory: (v: string) => void
+  setPoseComposer: (v: string[]) => void
+  setPoseIntensity: (v: string) => void
+  // L10
+  setEpicMove: (v: string) => void
+  setEpicMoveCategory: (v: string) => void
+  setComboSequence: (v: string) => void
+  setMoveIntensity: (v: string) => void
+  // L11
+  setMuscleDefinition: (v: string) => void
+  setMuscleGroups: (v: string[]) => void
+  setPhysiquePreset: (v: string) => void
+  setBodyDetail: (v: string[]) => void
+  // L12
+  setAnimeDarkStyle: (v: string) => void
+  setAnimePhysics: (v: string) => void
+  setAnimeIntensity: (v: string) => void
+  setAnimeEffects: (v: string[]) => void
+  // L13
+  setLightingScheme: (v: string) => void
+  setLightAnimation: (v: string) => void
+  setLightIntensity: (v: string) => void
+  setLightColorShift: (v: string) => void
 }

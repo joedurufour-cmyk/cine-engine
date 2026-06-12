@@ -10,6 +10,12 @@ import L6Costume from './layers/L6Costume'
 import L7Parameters from './layers/L7Parameters'
 import L8Negative from './layers/L8Negative'
 
+import L9Poses from './layers/L9Poses'
+import L10EpicMoves from './layers/L10EpicMoves'
+import L11Physique from './layers/L11Physique'
+import L12AnimeDark from './layers/L12AnimeDark'
+import L13Lighting from './layers/L13Lighting'
+
 const LAYERS = [
   { id: 'L1_CHARACTER',   number: 1, Component: L1Character },
   { id: 'L2_ACTION',      number: 2, Component: L2Action },
@@ -19,6 +25,11 @@ const LAYERS = [
   { id: 'L6_COSTUME',     number: 6, Component: L6Costume },
   { id: 'L7_PARAMETERS',  number: 7, Component: L7Parameters },
   { id: 'L8_NEGATIVE',    number: 8, Component: L8Negative },
+  { id: 'L9_POSES',       number: 9, Component: L9Poses },
+  { id: 'L10_EPIC_MOVES', number: 10, Component: L10EpicMoves },
+  { id: 'L11_PHYSIQUE',   number: 11, Component: L11Physique },
+  { id: 'L12_ANIME_DARK', number: 12, Component: L12AnimeDark },
+  { id: 'L13_LIGHTING',   number: 13, Component: L13Lighting },
 ]
 
 export default function Sidebar() {
